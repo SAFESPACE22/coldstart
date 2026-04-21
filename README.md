@@ -161,4 +161,4 @@ MIT — use it, fork it, build on it. Just don't claim you invented it.
 
 ## Credits
 
-Inspired by every engineer who ever said "I wish we'd written this down before we started." And by [caveman](https://github.com/JuliusBrussee/caveman) for showing what a well-crafted skill looks like.
+Inspired by every engineer who ever said "I wish we'd written this down before we started."

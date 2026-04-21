@@ -191,6 +191,8 @@ A good master prompt has these properties:
 
 A bad master prompt reads like a feature list. A good one reads like a senior engineer's mental model of the project.
 
+Before generating any output, read `templates/MASTER_PROMPT.md` and `templates/member_package.md` in this skill's directory. Use them as quality anchors — match their density, specificity, and structure. Do not copy their content; use them to calibrate what "good" looks like for this project.
+
 ## Behavioral Notes
 
 - **Never ask more than one question at a time.** Multiple simultaneous questions overwhelm the user and reduce answer quality.
