@@ -31,6 +31,7 @@ Every time you run `prompt-architect`, you walk away with:
 | `MASTER_PROMPT.md` | 400-600 word structured prompt covering scope, risks, architecture, and definition of done. Works in any AI tool. |
 | `{member}_package.md` | One per team member. Sub-prompt + prioritized task list + role-scoped CLAUDE.md context. |
 | `README_SNIPPET.md` | Project overview ready to paste into your repo's README. |
+| `CLAUDE.md` + `.cursor/rules/project-context.mdc` + `.clinerules` + `GEMINI.md` + `AGENTS.md` + `.github/copilot-instructions.md` | Project-level context auto-loaded by Claude Code, Cursor, Cline, Gemini CLI, OpenAI Codex CLI, and GitHub Copilot. Generated once, works everywhere. |
 
 ## How It Works
 
@@ -56,27 +57,48 @@ The skill runs with a **Principal Software Engineer persona** baked in — 20+ y
 
 Your generated master prompt reflects all of this automatically. It's what you'd get if a senior engineer wrote the spec for you — without having one on staff.
 
+## Folder Structure
+
+**This repo:**
+
+```
+coldstart/
+├── prompt-architect/
+│   └── SKILL.md          # the skill — everything runs from here
+└── README.md
+```
+
+**What gets generated in your project when you run the skill:**
+
+```
+your-project/
+├── .cursor/
+│   └── rules/
+│       └── project-context.mdc   # Cursor
+├── .github/
+│   └── copilot-instructions.md   # GitHub Copilot
+├── .prompt-architect/
+│   ├── MASTER_PROMPT.md          # source of truth
+│   ├── README_SNIPPET.md         # paste into your README
+│   └── {member}_package.md       # one per team member
+├── .clinerules                    # Cline
+├── AGENTS.md                      # OpenAI Codex CLI
+├── CLAUDE.md                      # Claude Code
+└── GEMINI.md                      # Gemini CLI
+```
+
 ## Install
 
-### Claude Code (quick install)
+### Mac / Linux
 
 ```bash
-git clone https://github.com/SAFESPACE22/prompt-architect.git
-cp -r prompt-architect/prompt-architect ~/.claude/skills/
+mkdir -p ~/.claude/skills/prompt-architect && curl -o ~/.claude/skills/prompt-architect/SKILL.md https://raw.githubusercontent.com/SAFESPACE22/coldstart/main/prompt-architect/SKILL.md
 ```
 
-Verify it's in the right place:
+### Windows
 
-```bash
-ls ~/.claude/skills/prompt-architect/
-# should show: SKILL.md
-```
-
-### Claude Code (plugin system — coming soon)
-
-```bash
-claude plugin marketplace add SAFESPACE22/prompt-architect
-claude plugin install prompt-architect
+```powershell
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\skills\prompt-architect" | Out-Null; Invoke-WebRequest -Uri "https://raw.githubusercontent.com/SAFESPACE22/coldstart/main/prompt-architect/SKILL.md" -OutFile "$env:USERPROFILE\.claude\skills\prompt-architect\SKILL.md"
 ```
 
 ### Enable it

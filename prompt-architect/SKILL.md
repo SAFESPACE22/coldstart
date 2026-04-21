@@ -145,22 +145,78 @@ interfaces they own, review checklist.}
 
 A ready-to-paste project overview for the repo's README. 2-3 paragraphs of prose derived from the master prompt, written for a general audience rather than for AI consumption.
 
+#### File 4: Cross-Agent Config Files
+
+Generate the following files at the project root (same directory as `.prompt-architect/`). All files contain the same project-level context derived from the master prompt — covering project overview, stack, architecture decisions, key constraints, and definition of done. This is NOT role-scoped; it is team-wide context for any AI tool to pick up automatically.
+
+Do not ask the user which tools they use — generate all files every time. An unused file costs nothing; missing one costs the user setup time later.
+
+**`CLAUDE.md`** — Claude Code reads this automatically from the project root.
+
+**`.cursor/rules/project-context.mdc`** — Cursor's modern rules format. Create the `.cursor/rules/` directory. The file must include this frontmatter:
+```
+---
+description: Project context and engineering constraints
+alwaysApply: true
+---
+```
+Then the context content below the frontmatter.
+
+**`.clinerules`** — Single file at project root. Cline reads this automatically.
+
+**`GEMINI.md`** — Project root. Gemini CLI reads this automatically.
+
+**`AGENTS.md`** — Project root. OpenAI Codex CLI reads this automatically.
+
+**`.github/copilot-instructions.md`** — GitHub Copilot reads this automatically. Create the `.github/` directory if it does not exist.
+
+The content body (used in all six files, after any required frontmatter) should be 200-300 words:
+
+```markdown
+# Project Context
+
+## What We're Building
+{2-3 sentence project summary}
+
+## Stack & Architecture
+{bullet list of key technical decisions}
+
+## What's In v1 / What's Not
+{two short bullet lists}
+
+## Key Risks
+{top 2-3 risks, one line each}
+
+## Definition of Done
+{3-5 explicit criteria}
+
+## Engineering Principles
+{3-5 opinionated stances specific to this project}
+```
+
 ### Phase 6: Delivery
 
 After writing all files, show the user:
 
 ```
-✓ Project package generated in .prompt-architect/
+✓ Project package generated.
 
-  📄 MASTER_PROMPT.md       ← the source of truth
-  📄 README_SNIPPET.md      ← drop into your README
-  📄 {member}_package.md    ← one per team member
+  .prompt-architect/
+    📄 MASTER_PROMPT.md       ← the source of truth
+    📄 README_SNIPPET.md      ← drop into your README
+    📄 {list each generated package file by actual name, e.g. alex_package.md, jordan_package.md}
+
+  Project root (auto-loaded by AI tools):
+    📄 CLAUDE.md                              ← Claude Code
+    📄 .cursor/rules/project-context.mdc     ← Cursor
+    📄 .clinerules                            ← Cline
+    📄 GEMINI.md                              ← Gemini CLI
+    📄 AGENTS.md                              ← OpenAI Codex CLI
+    📄 .github/copilot-instructions.md        ← GitHub Copilot
 
 Recommended next steps:
-  1. Copy MASTER_PROMPT.md content into any AI tool when starting work
-  2. Each team member opens their _package.md file
-  3. Copy the CLAUDE.md section into the root of your project for 
-     Claude Code to pick up automatically
+  1. Each team member opens their _package.md file
+  2. Open any AI tool in this directory — context loads automatically
 ```
 
 Offer to do any of those steps directly if the user wants.
