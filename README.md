@@ -2,10 +2,6 @@
 
 **stop prompting from scratch. start every project with a master prompt.**
 
-![Stars](https://img.shields.io/github/stars/SAFESPACE22/prompt-architect?style=flat&color=e4ff5e)
-![Last Commit](https://img.shields.io/github/last-commit/SAFESPACE22/prompt-architect?style=flat)
-![License](https://img.shields.io/github/license/SAFESPACE22/prompt-architect?style=flat)
-
 [Install](#install) • [Before/After](#before--after) • [How It Works](#how-it-works) • [Why](#why)
 
 ---
